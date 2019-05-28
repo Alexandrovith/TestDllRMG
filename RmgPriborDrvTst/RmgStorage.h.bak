@@ -1,0 +1,47 @@
+#pragma once
+#include "windows.h"
+#include "Storage.h"
+#include "RmgRawParam.h"
+#include <string>
+#include <map>
+#include <vector>
+
+#ifdef DEBUG_LOG
+#define LOCK LOG("Lock: %s\n", __FUNCTION__);lockData()
+#define UNLOCK LOG("Unlock: %s\n", __FUNCTION__);lnlockData()
+#else
+#define LOCK lockData()
+#define UNLOCK unlockData()
+#endif
+
+using namespace std;
+
+class RmgStorage : public Storage
+{
+public:
+	typedef map<string, RmgRawParam> tRmgParams;
+	typedef tRmgParams::iterator tRmgParamsIt;
+
+	typedef map<string, vector<tRmgParams>> tStorageData;
+	typedef tStorageData::iterator tStorageDataIt;
+
+	RmgStorage(void);
+	~RmgStorage(void);
+	virtual bool set(string name, void* param);
+	virtual void* get(string name);
+	virtual int getValue(string name, UCHAR* buf);
+	bool setArchiveData(string name,  vector<RmgStorage::tRmgParams> paramsVector);
+	virtual string getNewArchiveData(Json::Value& jsonAddress);	
+private:
+	Json::Value convertStorageParamToArchiveParam(tRmgParamsIt & recIt);
+	string getStringByType(PARAM_TYPE type);
+	int getParamValue(RmgRawParam* param, UCHAR* buf);
+	inline void	lockData() { EnterCriticalSection(&_dataLock);};
+	inline void	unlockData() { LeaveCriticalSection(&_dataLock);};
+	inline void	initLock() { InitializeCriticalSection(&_dataLock);};
+	inline void	delLock() { DeleteCriticalSection(&_dataLock);};
+	CRITICAL_SECTION _dataLock;
+	tRmgParams _rmgRawData;
+	tStorageData _rmgArchiveData;
+};
+

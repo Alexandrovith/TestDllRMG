@@ -1,0 +1,1029 @@
+#include <locale>
+#include "stdafx.h"
+#include <time.h>
+#include <wchar.h>
+
+#include "Connect.h"
+#include "SerialDev.h"
+#include "Common.h"
+#include "RmgTransaction.h"
+#include "CodeErr.h"
+#include "Messages.h"
+
+#define OLDTIME
+
+map<int, TagDescription> tags;
+
+
+SerialDev::SerialDev (const Json::Value& deviceConfig, const Json::Value& deviceConfigType) :
+	//_hComm (0)
+	//_lConnectRepeatTimeout (30),
+	//_dwTransactionTimeout (40), // 3*4
+	//,_debug (0)
+	_state (SD_INIT)
+	,bStop (false)
+	,bFirstSubscribe (true)
+	,_localStorage (0)
+	, _deviceConfig(deviceConfig)
+	,_deviceConfigType(deviceConfigType)
+{
+	try
+	{
+		_transactions.reserve (16);
+		_devName = deviceConfig["Name"].asString ();
+		//_flowCtrl = deviceConfig["FlowCtrl"].asInt ();
+		_deviceType = deviceConfigType["Name"].asString ();
+		_devProtocol = deviceConfigType["Protocol"].asString ();
+
+		_dataBits = deviceConfig["DataBits"].asInt ();
+		string asPort = deviceConfig["Port"].asString ();
+		strcpy_s (caPort, SIZE_PORT, asPort.c_str ());
+		int iPort;
+		string _deviceTransport = deviceConfig["Transport"].asString ();
+		if (_deviceTransport == "Ethernet")
+		{
+			iPort = atoi (caPort);
+			if (iPort)
+			{
+				Transport = ETransport::Ethernet;
+				Line = new CTCP (deviceConfig["UrlSingleParam"].asString (), iPort);
+			}
+			else
+			{
+				Mess->Out ("Неверный номер порта");
+				return;
+			}
+		}
+		else
+		{
+			Transport = ETransport::Serial;
+			int _baudRate = deviceConfig["BaudRate"].asInt ();
+			int _parity = deviceConfig["Parity"].asInt ();
+			int _stopBit = deviceConfig["StopBit"].asInt ();
+			iPort = atoi (asPort.substr (3, asPort.length () - 3).c_str ());
+			Line = new CComPort (/*this, */iPort, _baudRate, _parity, _dataBits, _stopBit);
+		}
+		time_t tCurTime;//TODO delete?:
+		time (&tCurTime);
+		_tRepeatTime = tCurTime + 30;// _lConnectRepeatTimeout;
+
+		//auto RTS = deviceConfig["SetRTS"];
+		//if (RTS.isNull ())
+		//{
+		//	_setRTS = 0;
+		//}
+		//else
+		//{
+		//	_setRTS = RTS.asInt ();
+		//}
+		//if(DeviceConfig["FlowCtrl"].isNumeric()){}
+		//deviceConfigType["Protocol"].asString ();
+		_activeTransactionIdx = 0;
+		time (&_tRepeatTime);
+		//memset (&_ovWrite, 0, sizeof (_ovWrite));
+		//memset (&_ovRead, 0, sizeof (_ovRead));
+#ifdef OLDTIME	// start time to get archives from  TODO проверить OLDTIME
+		struct tm starttime;
+		starttime.tm_year = 115;
+		starttime.tm_mon = 0;
+		starttime.tm_mday = 1;
+		starttime.tm_hour = 0;
+		starttime.tm_min = 0;
+		starttime.tm_sec = 0;
+		_htime = mktime (&starttime);
+		_dtime = _htime;
+
+		auto TH = deviceConfig["TH"];
+		switch (!TH.isNull ())
+		{
+		case true:
+			string timeToSave = TH.asString ();
+			string subtime = timeToSave.substr (0, 2);
+			if (subtime.length () != 2)
+				break;
+			int sday = stoi (subtime);
+			starttime.tm_mday = sday;
+			subtime = timeToSave.substr (2, 2);
+			if (subtime.length () != 2)
+				break;
+			int smonth = stoi (subtime);
+			starttime.tm_mon = smonth - 1;
+			subtime = timeToSave.substr (4, 4);
+			if (subtime.length () != 4)
+				break;
+			int syear = stoi (subtime);
+			starttime.tm_year = syear - 1900;
+			Mess->Out ("(%s) ArchHour init: %02d.%02d.%04d", caPort, sday, smonth, syear);
+			_htime = mktime (&starttime) - 24 * 60 * 60;
+		}
+
+		auto TD = deviceConfig["TD"];
+		switch (!TD.isNull ())
+		{
+		case true:
+			string timeToSave = TD.asString ();
+			string subtime = timeToSave.substr (0, 2);
+			if (subtime.length () != 2)
+				break;
+			int sday = stoi (subtime);
+			starttime.tm_mday = sday;
+			subtime = timeToSave.substr (2, 2);
+			if (subtime.length () != 2)
+				break;
+			int smonth = stoi (subtime);
+			starttime.tm_mon = smonth - 1;
+			subtime = timeToSave.substr (4, 4);
+			if (subtime.length () != 4)
+				break;
+			int syear = stoi (subtime);
+			starttime.tm_year = syear - 1900;
+
+			Mess->Out ("(%s) ArchDay init: %02d.%02d.%04d", caPort, sday, smonth, syear);
+			_dtime = mktime (&starttime) - 24 * 60 * 60;
+		}
+#else // set start archive time to now - 2 days for hourly archive, 3 for daily archives
+		_htime = _tRepeatTime - 24 * 60 * 60 * 32;
+		_dtime = _htime - 24 * 60 * 60;
+#endif
+		}
+	catch (const std::exception& exc)
+	{
+		Mess->Out ("SerialDev: %s", exc.what ());
+	}
+}
+//_____________________________________________________________________________
+
+SerialDev::~SerialDev (void)
+{
+	if (Line != nullptr)
+		delete Line;
+
+	for (UINT reqNum = 0; reqNum < _transactions.size (); reqNum++)
+	{
+		delete _transactions[reqNum];
+	}
+	_transactions.clear ();
+	//if (_hComm)	CloseHandle (_hComm);//TODO delete?
+}
+///_____________________________________________________________________________
+// \brief Returns active transaction pointer
+inline Transaction * SerialDev::getTransaction ()
+{
+	if (_activeTransactionIdx >= _transactions.size ())
+		return nullptr;
+	return _transactions[_activeTransactionIdx];
+}
+//_____________________________________________________________________________
+
+int SerialDev::getDataBits ()
+{
+	return _dataBits;	// ((CComPort*)Line)->GetByteSize ();
+}
+//_____________________________________________________________________________
+///_____________________________________________________________________________
+
+Transaction* SerialDev::findTransactionByAddress (Json::Value& jsonAddress)
+{
+	string reqName = jsonAddress["RequestName"].asString ();
+	if (jsonAddress["RequestName"].asString ().empty ())
+		return 0;
+
+	return findTransactionByName (reqName);
+}
+//_____________________________________________________________________________
+
+Json::Value SerialDev::findRequest (string& name)
+{
+	if (_deviceConfigType["Requests"].isNull ())
+		return Json::Value ();
+	for (UINT reqNum = 0; reqNum < _deviceConfigType["Requests"].size (); reqNum++)
+	{
+		string rName = _deviceConfigType["Requests"][reqNum]["Name"].asString ();
+		if (rName.compare (name) == 0)
+		{
+			return _deviceConfigType["Requests"][reqNum];
+		}
+	}
+	return Json::Value ();
+}
+//_____________________________________________________________________________
+
+Transaction* SerialDev::findTransactionByName (string& name)
+{
+	for (UINT reqNum = 0; reqNum < _transactions.size (); reqNum++)
+	{
+		if (_transactions[reqNum]->getName ().compare (name) == 0 &&
+				_transactions[reqNum]->checkAdditionalParams ())
+		{
+			return _transactions[reqNum];
+		}
+	}
+	return 0;
+}
+//_____________________________________________________________________________
+
+bool SerialDev::addRequest (Transaction * transaction)
+{
+	if (0 == transaction)
+		return FALSE;
+	if (!transaction->createRequest ())
+		return FALSE;
+	_transactions.push_back (transaction);
+	return TRUE;
+}
+///_____________________________________________________________________________
+// \brief Subscribe to parameter
+// \param tagID id to simple access after subscription or ZERO in case of write value
+// \param jsonAddress parsed address string to subscribe
+// \param isOneShot flag to make only one request without schedule
+// \return true on success
+bool SerialDev::subscribe (UINT tagId, Json::Value& jsonAddress, bool isOneShot)
+{
+	//lockDevices();
+	bFirstSubscribe = false;
+
+	auto RN = jsonAddress["RequestName"];
+	if (RN.empty ())
+		return false;
+
+	Transaction * transaction = 0;
+	string reqName = RN.asString ();
+	if (!isOneShot)		// for oneShot request create new transaction
+		transaction = findTransactionByName (reqName);
+	if (reqName.compare ("W1") == 0 || reqName.compare ("W0") == 0)
+	{
+		Mess->Out ("subscribe: Параметр для записи");
+		return false;
+	}
+	if (reqName.compare ("Virtual") != 0 && transaction == 0)
+	{ // create new transaction
+		if (getDevProtocol ().compare ("SF") == 0)
+		{
+		}
+		else if (getDevProtocol ().compare ("uELCOR") == 0)
+		{
+			if (reqName.compare ("H2") == 0 || reqName.compare ("D2") == 0)
+			{
+				// firstly request start day archive
+				string req1 = reqName;
+				req1[1] = '1';
+				Json::Value additionalRequest;
+				additionalRequest["RequestName"] = req1;
+				transaction = RmgTransaction::createTransaction (this, req1, additionalRequest["ParamName"].asString ());
+				if (transaction != 0)
+				{
+					transaction->setOneShot (TRUE);
+					addRequest (transaction);
+				}
+			}
+
+			transaction = RmgTransaction::createTransaction (this, reqName, jsonAddress["ParamName"].asString ());
+			if (transaction == 0)
+			{
+				return false;
+			}
+			if (isOneShot)
+				transaction->setOneShot (TRUE);
+			//transaction->addMoreParameters(_deviceConfig);
+			addRequest (transaction);
+		}
+		else
+		{
+			Mess->Out ("Unsupported protocol (%s) for Device: %s)", getDevProtocol (), caPort);
+			return false;
+		}
+	}
+	//unlockDevices();
+	// Add parameter to tags list
+	if (tagId != 0)
+	{
+		string paramName = jsonAddress.get ("ParamName", "").asString ();
+		if (paramName != "")
+		{
+			tags[tagId].ParamName = paramName;
+			tags[tagId].serailDev = this;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	return true;
+}
+///_____________________________________________________________________________
+// \brief subscribe for write parameter
+// \param jsonAddress parsed address string to subscribe
+// \param value buffer to write
+// \param iSize in bytes to write
+// \return true on success
+bool SerialDev::subscribeWrite (Json::Value& jsonAddress, char* value, int size)
+{
+	//lockDevices();
+	auto RN = jsonAddress["RequestName"];
+	if (RN.empty ())
+		return false;
+
+	std::string asProtocol = getDevProtocol ();
+	if (asProtocol.compare ("SF") == 0)
+	{
+	}
+	else if (asProtocol.compare ("uELCOR") == 0)
+	{
+		// create request to read service data before write - need to calculate write password
+		Transaction * transaction;
+		string asParamName = jsonAddress["ParamName"].asString ();
+		string asReqName = "R1";
+		//Json::Value additionalRequest;
+		//additionalRequest["RequestName"] = asReqName;
+		//additionalRequest["ParamName"] = jsonAddress["ParamName"];
+		if (!CreateCommByWr (transaction, asReqName, asParamName)) return false;
+		//transaction->InitParam (value, size);
+
+		asReqName = RN.asString ();
+		if (!CreateCommByWr (transaction, asReqName, asParamName)) return false;
+		transaction->setWriteParameter (asParamName, value, size);
+
+		// create request to read parameters - get new data
+		asReqName = "R4";//TODO restore?
+		if (!CreateCommByWr (transaction, asReqName, asParamName)) return false;
+	}
+	else
+	{
+		Mess->Out ("Unsupported protocol (%s) for Device: %s)", getDevProtocol (), _devName.c_str());
+		return false;
+	}
+	//unlockDevices();
+	return true;
+}
+///_____________________________________________________________________________
+
+bool SerialDev::CreateCommByWr (Transaction * &transaction, std::string asReqName, string ParamName)
+{
+	transaction = RmgTransaction::createTransaction (this, asReqName, ParamName);
+	if (transaction == 0)
+	{
+		return false;
+	}
+	transaction->setOneShot (TRUE);
+	transaction->ComIsWrite ();
+	addRequest (transaction);
+	return true;
+}
+///_____________________________________________________________________________
+// \brief Changes active transaction to the next, in case of transaction with continuation it will continue with current transaction. 
+//		  In case of transaction fired ones, remove transaction from list
+// \param tCurTime New fire time 
+void SerialDev::nextRequest (Transaction* tr, time_t tCurTime)
+{
+	_state = SD_NEXT_REQUEST;
+	if (tCurTime == 0)
+	{ // restart the same packet
+		_activeTransactionIdx++;
+		return;
+	}
+
+	if (tr->isNeedContinuation ()) // repeat the same packet
+		return;
+	if (tr->isOneShot ())
+	{
+		//		for (auto Tr = _transactions.begin (); Tr != _transactions.end (); Tr++)
+		//		{
+		//			if (*Tr == tr)
+		//			{
+		UINT command = GetCommand ();
+		Mess->Out ("del TrAct [%s][%c%c]", tr->GetParamName ().c_str (), command & 0xff, command >> 8); // TODO DELETE?
+//				delete tr;
+//				_transactions.erase (Tr);
+//				return;
+//			}
+//		}
+		delete tr;
+		_transactions.erase (_transactions.begin () + _activeTransactionIdx);
+		return;
+	}
+	tr->resetFireTime (tCurTime);
+	_activeTransactionIdx++;
+}
+///_____________________________________________________________________________
+// \brief Отправка команды прибору
+// \return 0 on success
+int SerialDev::SendTX ()
+{
+	bool bRet = 1;
+	Transaction* Transact = getTransaction ();
+	if (Transact)
+	{
+		Transact->prepareToSend ();		//getTransaction()->PrepareData();
+		unsigned __int8* cpBufTX = Transact->getOutBuffer ();
+		int iSizeTX = Transact->getOutLength (0x8d);
+		bRet = Line->Send ((__int8*)cpBufTX, iSizeTX);
+
+		char cpParamName[64];
+		char caCommand[4];
+		UINT uiComm;
+		LogF (Transact, cpParamName, caCommand, uiComm);
+#ifndef _DEBUG
+		if (uiComm == RMG_W0_COMMAND || uiComm == RMG_W1_COMMAND)
+#endif // !_DEBUG
+		{
+			int iShift = (cpBufTX[0] == 0xFF) ? RMG_FF_BYTES : 0;
+			Mess->Out ("[%s]\tTC[%s] отправлено (%d) %s", cpParamName, caCommand, iSizeTX,
+									Mess->CharArrToCharAsInt (cpBufTX + iShift, iSizeTX - iShift));
+		}
+	}
+	return bRet ? 0 : 1;
+}
+///_____________________________________________________________________________
+// \brief Получение ответа от прибора
+// \return 0 on success
+int SerialDev::RecieveRX ()
+{
+	Transaction* tr = _transactions[_activeTransactionIdx];
+	__int8* ucpRX = (_int8*)tr->getInBuffer ();
+	int iSize = tr->getInSize ();
+
+	int iRet = Line->Recieve (ucpRX, iSize, iLenRX);
+
+	char cpParamName[64];
+	char caCommand[4];
+	UINT uiComm;
+	LogF (tr, cpParamName, caCommand, uiComm);
+#ifndef _DEBUG
+	if (uiComm == RMG_W0_COMMAND || uiComm == RMG_W1_COMMAND)
+#endif
+	{
+		Mess->Out ("[%s]\tRC[%s] получено (%d) %s", cpParamName, caCommand, iLenRX, Mess->CharArrToCharAsInt (ucpRX, 4));
+	}
+	return iRet;
+}
+///_____________________________________________________________________________
+
+void SerialDev::LogF (Transaction * tr, char* cpParamName, char *caCommand, UINT &uiCommand)
+{
+	uiCommand = tr->getCommand ();
+	strcpy (cpParamName, tr->GetParamName ().c_str ());
+	//const char* cpPort = _port;
+	caCommand[0] = uiCommand & 0xff;
+	caCommand[1] = uiCommand >> 8;
+	caCommand[2] = 0;
+}
+///_____________________________________________________________________________
+// Безопасное получение кода команды
+DWORD SerialDev::GetCommand ()
+{
+	auto CurrTransact = getTransaction ();
+	return CurrTransact ? CurrTransact->getCommand () : 0;
+}
+///_____________________________________________________________________________
+
+int SerialDev::processResponse (Transaction * tr)
+{
+	time_t tCurTime;
+	time (&tCurTime);
+
+	try // TODO Delete ?
+	{
+		switch (tr->processResponse (iLenRX))
+		{ // Call specific processing sequence for actual protocol
+		case RESP_RETVAL::SUCCESS:
+		{
+			getStorage ()->setConnectionStatus (true);
+			tr->readDone ();						// special processing for actual protocol on successful input packet 
+			nextRequest (tr, tCurTime);	// Successfully processed
+		}
+		break;
+		case RESP_RETVAL::FAIL:
+			getStorage ()->setConnectionStatus (false);
+			Mess->Out ("[%s]\tFailed response (read %d of %d)", tr->GetParamName ().c_str (), iLenRX, tr->getInSize ());
+			nextRequest (tr, tCurTime);
+			return 1;
+		case RESP_RETVAL::NOTREADY:
+			Mess->Out ("[%s]\tWaiting (read %d of %d)", tr->GetParamName ().c_str (), iLenRX, tr->getInSize ());
+			nextRequest (tr, 0);
+			return -1;
+		case RESP_RETVAL::REWRITE:
+			getStorage ()->setConnectionStatus (false);
+			nextRequest (tr, tCurTime);
+			break;
+		case RESP_RETVAL::REPEAT:
+			getStorage ()->setConnectionStatus (false);
+			//nextRequest (tr, 0);
+			break;
+		}
+	}
+	catch (const std::exception& exc)
+	{
+		Mess->Out ("[%s]\tprocessResponse. %s", exc.what ());
+		return 1;
+	}
+	return 0;
+}
+///_____________________________________________________________________________
+// \brief This function converts string to wstring
+// \return nonzero in case of error
+wstring StringToWString (string &s)
+{
+	wstring wsTmp (s.begin (), s.end ());
+	return wsTmp;
+}
+///_____________________________________________________________________________
+
+std::wstring s2ws (const std::string& s)
+{
+	int len;
+	int slength = (int)s.length () + 1;
+	len = MultiByteToWideChar (CP_ACP, 0, s.c_str (), slength, 0, 0);
+	std::wstring r (len, L'\0');
+	MultiByteToWideChar (CP_ACP, 0, s.c_str (), slength, &r[0], len);
+	return r;
+}
+///_____________________________________________________________________________
+int SerialDev::openPort ()
+{
+	//if (ComPort == nullptr)	//	ComPort = new CComPort (iPort, _baudRate, _parity, _dataBits, _stopBit);
+	if (Line->IsConnected ())
+		return 0;
+	return Line->Connecting ()? 0 : 1;
+}
+///_____________________________________________________________________________
+// \brief Main processing sequence without any delay to return as fast as possible to process next device
+int SerialDev::processTransactions ()
+{
+	time_t tCurTime;
+	time (&tCurTime);
+	//Transaction * activeTransaction;
+	//if (bStop)
+	//{
+	//	return 0;
+	//}
+	switch (_state)
+	{
+	case SD_INIT:
+		if (difftime (tCurTime, _tRepeatTime) < 0)
+		{
+			return 1;
+		}
+
+		if (openPort () == 0)
+		{
+			_state = SD_NEXT_REQUEST;
+		}
+		break;
+	case SD_NEXT_REQUEST:
+		if (_activeTransactionIdx >= _transactions.size ())
+			_activeTransactionIdx = 0;
+
+		// find transaction to send
+		for (_activeTransactionIdx; _activeTransactionIdx != _transactions.size (); ++_activeTransactionIdx)
+		{
+			if (_transactions[_activeTransactionIdx]->isFire (tCurTime))
+			{// SendRequest		
+				activeTransaction = _transactions[_activeTransactionIdx];
+				if (SendTX ())
+				{
+					nextRequest (activeTransaction, tCurTime);
+					Mess->Out ("Can't Send request (%s) %d", caPort, GetCommand ());
+					getStorage ()->setConnectionStatus (false);
+					return 1;
+				}
+
+				if (RecieveRX ())
+				{
+					nextRequest (activeTransaction, 0); // TODO restore tCurTime?   free resource on current com port
+					Mess->Out ("Can't Recv response (%s) %d", caPort, GetCommand ());
+					getStorage ()->setConnectionStatus (false);
+					return 1;
+				}
+
+				_state = SD_WAIT_REQUEST_FINISH;
+				return 0;
+			}
+		}
+		break;
+	case SD_WAIT_REQUEST_FINISH:
+		activeTransaction = _transactions[_activeTransactionIdx];
+		//dwRes = WaitForSingleObject (_ovRead.hEvent, 0);
+		//switch (dwRes)
+		//{
+		//case WAIT_OBJECT_0:
+		//	CHECK_TIME
+		//		if (!GetOverlappedResult (_hComm, &_ovRead, &iLenRX, FALSE))//
+		//		{
+		//			LOGF (getName (), "Can't Recv Delayed response (%s) %d", _port, GetCommand ());//TODO MY
+		//			nextRequest (getTransaction (), tCurTime); // free resource on current com port
+		//			getStorage ()->setConnectionStatus (false);
+		//			return 1;
+		//		}
+		//		else
+		//		{
+		if (iLenRX > 3)//TODO restore 0 ?
+		{
+			processResponse (activeTransaction);//TODO restore getTransaction () ?
+		}
+		else
+		{ // wrong behavior
+			//if (!ClearCommError (_hComm, &dwErrors, &comStat)) // Report error in ClearCommError. 
+			//	break;
+			////return 1;
+			//if (dwErrors == 0 && comStat.cbInQue != 0)
+			//{
+			if (RecieveRX ())
+			{
+				Mess->Out ("Can't Recv response (%s) %d", caPort, GetCommand ());
+				Transaction *Tr = getTransaction ();
+				if (Tr)
+				{
+					nextRequest (Tr, tCurTime); // free resource on current com port
+					getStorage ()->setConnectionStatus (false);
+				}
+				return 1;
+			}
+			//}
+		}
+		//		}
+		//	FINISHCHECK_TIME ("GetOverlappedResult WAIT REQUEST");
+		//	break;
+		//case WAIT_TIMEOUT:
+		//	break;
+		//default:
+		//	LOGF (getName (), "Error on GetOverlappedResult: %d", GetLastError ());
+		//	break;
+		//}
+		//if (tCurTime > (_tTransactionStartTime + _dwTransactionTimeout))
+		//{
+		//	int cmdnum = GetCommand ();//TODO MY
+		//	LOGF (getName (), "[%s]\tTimeout on transact (%s) [%c%c], read: %d", getTransaction ()->GetParamName ().c_str (),
+		//				_port, cmdnum & 0xff, cmdnum >> 8, iLenRX);
+		//	//getTransaction()->setBadResponse();
+		//	nextRequest (getTransaction (), tCurTime); // free resource on current com port
+		//	getStorage ()->setConnectionStatus (false);
+		//	return 1;
+		//}
+		break;
+	default:
+		Mess->Out ("SerialDev::Process: UNKNOWN STATE (%s)", caPort);
+		break;
+	}
+	return 0;
+}
+///____________________________________________________________________________
+
+void SerialDev::setCurrentDateTime (unsigned char* rawDT)
+{
+	_currentDateTime.tm_year = rawDT[0] + 100;
+	_currentDateTime.tm_mon = rawDT[1] - 1;
+	_currentDateTime.tm_mday = rawDT[2];
+	_currentDateTime.tm_hour = rawDT[3];
+	_currentDateTime.tm_min = rawDT[4];
+	_currentDateTime.tm_sec = 0;
+}
+///____________________________________________________________________________
+
+time_t SerialDev::getCurrentDateTime ()
+{
+	return mktime (&_currentDateTime);
+}
+///____________________________________________________________________________
+/// \brief This function closes com port handles
+void SerialDev::closePort ()
+{
+	//if (_hComm != 0)
+	//{
+	//	CloseHandle (_hComm); // close file if already opened
+	//	_hComm = 0;
+	//}
+	//if (_ovWrite.hEvent != 0)
+	//{
+	//	CloseHandle (_ovWrite.hEvent); // close event handle if already opened
+	//	_ovWrite.hEvent = 0;
+	//}
+	//if (_ovRead.hEvent != 0)
+	//{
+	//	CloseHandle (_ovRead.hEvent);
+	//	_ovRead.hEvent = 0;
+	//}
+}
+
+
+///// \brief This function initializes com port class object
+///// \return nonzero in case of error
+//int SerialDev::openPort ()
+//{
+//	time_t tCurTime;
+//	time (&tCurTime);
+//
+//	closePort ();
+//
+//	wstring comname = L"\\\\.\\";
+//
+//	comname += s2ws (_port);
+//	_hComm = CreateFile (comname.c_str (), GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, FILE_FLAG_OVERLAPPED, 0);// | FILE_FLAG_NO_BUFFERING | FILE_FLAG_WRITE_THROUGH, 0); TODO REstore?
+//	//_hComm = CreateFile (comname.c_str (), GENERIC_READ | GENERIC_WRITE, 0, 0, OPEN_EXISTING, NULL, 0);
+//	if (_hComm == INVALID_HANDLE_VALUE)
+//	{
+//		LOGF (getName (), "Can't open port: %s Error: %d", _port, GetLastError ());
+//		_tRepeatTime = tCurTime + _lConnectRepeatTimeout;
+//		return -1;
+//	}
+//
+//	DWORD dwCommEvents = EV_RXCHAR | 0;
+//	//if (! ::SetCommMask(hComm, EV_RXCHAR|EV_TXEMPTY) )
+//	if (!::SetCommMask (_hComm, dwCommEvents))
+//	{
+//		LOGF (getName (), "Can't set port %s parameters, Error: %d", _port, GetLastError ());
+//		return -1;
+//	}
+//
+//	DCB dcb = { 0 };
+//
+//	dcb.DCBlength = sizeof (DCB);
+//
+//	if (!::GetCommState (_hComm, &dcb))
+//	{
+//		LOGF (getName (), "Failed to Get Comm State, Error: %d", GetLastError ());
+//		return E_FAIL;
+//	}
+//
+//	dcb.BaudRate = _baudRate;			// 9600;
+//	dcb.ByteSize = _dataBits;			//8;
+//	dcb.Parity = _parity;				//0;
+//	dcb.StopBits = _stopBit * 2 - 2;		//ONESTOPBIT;	
+//
+//	switch (_flowCtrl)
+//	{
+//	case 1: // hardware flow control
+//		dcb.fOutX = false;
+//		dcb.fInX = false;
+//		dcb.fOutxCtsFlow = true;
+//		dcb.fOutxDsrFlow = true;
+//		dcb.fDsrSensitivity = true;
+//		dcb.fRtsControl = RTS_CONTROL_HANDSHAKE;
+//		dcb.fDtrControl = DTR_CONTROL_HANDSHAKE;
+//		dcb.fBinary = 0;
+//		break;
+//	case 2: // xon/xoff
+//		dcb.fOutX = true;
+//		dcb.fInX = true;
+//		dcb.fOutxCtsFlow = false;
+//		dcb.fOutxDsrFlow = false;
+//		dcb.fDsrSensitivity = false;
+//		dcb.fRtsControl = RTS_CONTROL_DISABLE;
+//		dcb.fDtrControl = DTR_CONTROL_DISABLE;
+//		break;
+//	}
+//
+//	switch (_setRTS)
+//	{
+//	case 1:
+//		EscapeCommFunction (_hComm, CLRRTS);  // for RMG / ec605 
+//		break;
+//	case 2:
+//		EscapeCommFunction (_hComm, SETRTS);
+//		break;
+//	}
+//
+//	if (!::SetCommState (_hComm, &dcb))
+//	{
+//
+//		LOGF (getName (), "Failed to Set Comm State (%s), Error: %d", _port, GetLastError ());
+//		return E_FAIL;
+//	}
+//
+//	COMMTIMEOUTS timeouts;
+//	timeouts.ReadIntervalTimeout = 300 * 4;//MAXDWORD; 
+//	timeouts.ReadTotalTimeoutMultiplier = 5 * 4;
+//	timeouts.ReadTotalTimeoutConstant = 5 * 4;//MAXDWORD;
+//	timeouts.WriteTotalTimeoutMultiplier = 5 * 4;
+//	timeouts.WriteTotalTimeoutConstant = 1000 * 4;
+//
+//	if (!SetCommTimeouts (_hComm, &timeouts))
+//	{
+//		LOGF (getName (), "Error setting time-outs (%s). Error: %d", _port, GetLastError ());
+//		return -1;
+//	}
+//	PurgeComm (_hComm, PURGE_RXABORT | PURGE_RXCLEAR);
+//
+//	for (int i = 0; i != _transactions.iSize (); i++)
+//	{
+//		_transactions[i]->setStartTime (tCurTime);
+//		_transactions[i]->setFireTime (tCurTime);
+//	}
+//
+//	_activeTransactionIdx = 0;
+//
+//	memset (&_ovWrite, 0, sizeof (_ovWrite));
+//	memset (&_ovRead, 0, sizeof (_ovRead));
+//
+//	_ovWrite.hEvent = CreateEvent (NULL, TRUE, FALSE, NULL);
+//	//_ovRead.hEvent = CreateEvent (NULL, TRUE, FALSE, NULL);//TODO: RESTORE ?
+//	_ovRead.hEvent = CreateEvent (NULL, TRUE, TRUE, NULL);
+//
+//	if (_ovWrite.hEvent == NULL || _ovRead.hEvent == NULL)
+//	{	// Error creating overlapped event handles. 
+//		LOGF (getName (), "Error creating overlapped events (%s).", _port);
+//		return -1;
+//	}
+//	return 0;
+//}
+/////_____________________________________________________________________________
+//// \brief Receives data from com port
+//// \return 0 on success
+//int SerialDev::RecieveRX ()
+//{
+//	Transaction* tr = _transactions[_activeTransactionIdx];
+//	UCHAR* addr = tr->getInBuffer ();
+//	UCHAR* ucpRX = addr;
+//	int size = tr->getInSize ();
+//	UINT command = GetCommand ();
+//	char cpParamName[64];
+//	char caCommand[4];
+//
+//	PurgeComm (_hComm, PURGE_RXABORT | PURGE_RXCLEAR | PURGE_TXABORT | PURGE_TXCLEAR);
+//	int retval;
+//	if (retval = ClearOverlapping (_ovRead, command))
+//		return retval;
+//
+//	for (size_t i = 0; i < 5; i++)
+//	{
+//		*((int*)addr) = 0;
+//	}
+//	int iCount = 0;
+//	iLenRX = 0;// tr->GetRecieveLen ();
+//
+//	//while (WaitForSingleObject (_ovRead.hEvent, 5000) == WAIT_OBJECT_0);
+//	{
+//		ReadFile (_hComm, ucpRX, size, &iLenRX, &_ovRead);
+//	}
+//	WaitForSingleObject (_ovRead.hEvent, 10000);
+//	//if (ReadFile (_hComm, ucpRX, iSize, NULL, &_ovRead))//&iLenRX
+//	//{
+//	//	while (WaitForSingleObject (_ovRead.hEvent, 2000) == WAIT_OBJECT_0);
+//	//	GetOverlappedResult (_hComm, &_ovRead, &iLenRX, FALSE);
+//	//	//WaitForSingleObject (_ovRead.hEvent, 2000);
+//	//	LogF (tr, cpParamName, caCommand);
+//	//	LOGF (getName (), "[%s]\tRC[%s] Получено (%d)", cpParamName, caCommand, iLenRX/*, CharArrToCharAsInt (addr, iLenRX)*/);
+//	//}
+//	//else
+//	//{
+//	//	while (WaitForSingleObject (_ovRead.hEvent, 2000) == WAIT_OBJECT_0);
+//	//	GetOverlappedResult (_hComm, &_ovRead, &iLenRX, TRUE);
+//	//	LogF (tr, cpParamName, caCommand);
+//	//	//LOGF (getName (), "[%s]\tRC[%s]warning: %s", cpParamName,	/*cpPort, */caCommand, CLastErr::AsChar (::GetLastError ()));//(%s)
+//	//	LOGF (getName (), "[%s]\tRC[%s] Получено (%d)", cpParamName, caCommand, iLenRX/*, CharArrToCharAsInt (addr, iLenRX)*/);
+//	//}
+//	
+//	//} while (ResponseIsFull(addr, iLenRX) == false);
+//	////do
+//	////{
+//	//	ReadFile (_hComm, ucpRX, iSize, &iLenRX, &_ovRead);
+//	//	ucpRX += iLenRX;
+//	//	if (WaitForSingleObject (_ovRead.hEvent, 2000) == WAIT_OBJECT_0)
+//	//	{
+//	//		LOGF (getName (), "[%s]\tRC(%s)[%s]err: %s", cpParamName,
+//	//					cpPort, caCommand, CLastErr::AsChar (::GetLastError ()));
+//	//	}
+//	//	else
+//	//	{	// Обработка ошибки //
+//	//		GetOverlappedResult (_hComm, &_ovRead, &iLenRX, FALSE);
+//	//		LOGF (getName (), "[%s]\tRC[%s] Получено (%d)", cpParamName,
+//	//					caCommand, iLenRX/*, CharArrToCharAsInt (addr, iLenRX)*/);
+//	//		//break;
+//	//	}
+//	//	ClearOverlapping (_ovRead, uiCommand);
+//	////} while (ResponseIsFull(addr, iLenRX) == false);
+//
+//	//ReadFile (_hComm, addr, iSize, &iLenRX, &_ovRead);
+//	//if (WaitForSingleObject (_ovRead.hEvent, 2000) == WAIT_OBJECT_0)
+//	//{
+//	//	GetOverlappedResult (_hComm, &_ovRead, &iLenRX, TRUE);
+//	//	LOGF (getName (), "[%s]\t(%s)[%c%c] Получено (%d) %s", tr->GetParamName ().c_str (),
+//	//				_port, iLenRX, CharArrToCharAsInt (addr, iLenRX));
+//	//}
+//	//else
+//	//{	// Обработка ошибки //
+//	//	LOGF (getName (), "[%s]\t(%s)[%c%c]Can't recieve: %s", tr->GetParamName ().c_str (),
+//	//				_port, uiCommand & 0xff, uiCommand >> 8, CLastErr::AsChar (::GetLastError ()));
+//	//}
+//
+//	////if (!ReadFile (_hComm, addr, iSize, &iLenRX, NULL))
+//	//if (!ReadFile (_hComm, addr, iSize, &iLenRX, &_ovRead))
+//	//{
+//	//	if (GetLastError () != ERROR_IO_PENDING)
+//	//	{    // read not delayed?  // Error in communications; report it.
+//	//		UINT ucmd = GetCommand ();	// getTransaction ()->getCommand ();  TODO MY
+//	//		LOGF (getName (), "RecvTransaction (%s) error:%d cmd:%d", _port, ::GetLastError (), ucmd & 0xff, ucmd >> 8);
+//	//		return 1;
+//	//	}
+//	//}
+//	//else
+//	//{
+//	//	LOGF (getName (), "RX_RC %s ", _ovRead.Pointer);
+//	//}
+//	return 0;
+//}
+//_____________________________________________________________________________
+//// \brief Sends request to com port
+//// \return 0 on success
+//int SerialDev::SendTX ()
+//{
+//	DWORD dwWritten;
+//	CHECK_TIME
+//	auto Transact = getTransaction ();
+//		Transact->prepareToSend ();		//getTransaction()->PrepareData(); // TODO Попробовать getTransaction()->PrepareData()  ?
+//	PurgeComm (_hComm, PURGE_RXABORT | PURGE_RXCLEAR | PURGE_TXABORT | PURGE_TXCLEAR);
+//	//ResetEvent (_ovWrite.hEvent);	//_ovRead
+//	time (&_tTransactionStartTime);
+//	//_tTransactionStartTick = ::GetTickCount ();
+//	char* outBuf = (char*)Transact->getOutBuffer ();
+//	int iSize = Transact->getOutLength (0x8d);
+//
+//	UINT uiCommand = GetCommand ();// Transact->getCommand ();//TODO MY	
+//	//int iStartOut = (outBuf[0] == -1) ? RMG_FF_BYTES : 0;
+//	//LOGF (getName (), "TX[%c%c] %s", (uiCommand) & 0xff, uiCommand >> 8, CharArrToCharAsInt (outBuf + iStartOut, iSize - RMG_FF_BYTES));
+//	if (uiCommand == 0)//TODO MY
+//		return -1;
+//
+//	// TODO MY:
+//	int retval;
+//	if (retval = ClearOverlapping (_ovWrite, uiCommand))
+//		return retval;
+//	dwWritten = iSize;
+//
+//	WriteFile (_hComm, outBuf, iSize, &dwWritten, &_ovWrite);
+//	if (WaitForSingleObject (_ovWrite.hEvent, 2000) == WAIT_OBJECT_0)
+//		GetOverlappedResult (_hComm, &_ovWrite, &dwWritten, TRUE);
+//	else
+//	{	// Обработка ошибки 
+//		LOGF (getName (), "(%s)[%c%c]Can't send request error: %d", _port, uiCommand & 0xff, uiCommand >> 8, CLastErr::AsChar (::GetLastError ()));
+//	}
+//
+//	//do
+//	//{
+//	//	WriteFile (_hComm, outBuf, iSize, &dwWritten, &_ovWrite);
+//	//	if (WaitForSingleObject (_ovWrite.hEvent, 2000) == WAIT_OBJECT_0)
+//	//		;
+//	//	else
+//	//	{	// Обработка ошибки 
+//	//		LOGF (getName (), "(%s)[%c%c]Can't send request error: %d", _port, uiCommand & 0xff, uiCommand >> 8, CLastErr::AsChar (::GetLastError ()));
+//	//	}
+//	//} 
+//	//while (GetOverlappedResult (_hComm, &_ovWrite, &dwWritten, FALSE));
+//
+//	//LOGF (getName (), "Отправлено %d", dwWritten);
+//
+//	//if (!WriteFile (_hComm, outBuf, iSize, &dwWritten, &_ovWrite))
+//	//{
+//	//	DWORD ulLastErr = ::GetLastError ();
+//	//	//LOGF (getName (), "(%s)[%c%c] Сбой отправки: %s", _port, uiCommand & 0xff, uiCommand >> 8, CLastErr::AsChar (ulLastErr));
+//	//	//if (GetLastError () != ERROR_IO_PENDING)
+//	//	if (ulLastErr != ERROR_IO_PENDING)
+//	//	{
+//	//		//UINT uiCommand = Transact->getCommand ();
+//	//		LOGF (getName (), "(%s)[%c%c]Can't send request error: %d", _port, uiCommand & 0xff, uiCommand >> 8, CLastErr::AsChar (ulLastErr));
+//	//		// WriteFile failed, but it isn't delayed. Report error and abort.  
+//	//		return -1;
+//	//	}
+//	//	else
+//	//	{
+//	//		DWORD bytesWritten;
+//	//		//set wait for send state
+//	//		if (!GetOverlappedResult (_hComm, &_ovWrite, &bytesWritten, TRUE))
+//	//		{
+//	//			LOGF (getName (), "SerialDev::SendTransaction:GetOverlappedResult FAILED!");
+//	//		}
+//	//		else
+//	//		{
+//	//			////					LOG("SerialDev::SendTransaction:GetOverlappedResult SUCCESS! wrote %d bytes", bytesWritten);
+//	//		}
+//	//	}
+//	//}
+//	//else
+//	//{
+//	//			LOGF(getName (), "SerialDev::SendTransaction:WriteFile SUCCESS");				// WriteFile completed immediately. 
+//	//}
+//
+//	int iStartOut = (outBuf[0] == -1) ? RMG_FF_BYTES : 0;
+//	LOGF (getName (), "[%s]\tTX[%c%c](%d) %s", Transact->GetParamName().c_str(), (uiCommand) & 0xff, uiCommand >> 8, dwWritten, 
+//				CharArrToCharAsInt (outBuf + iStartOut, dwWritten - RMG_FF_BYTES));
+//	FINISHCHECK_TIME ("SendTransaction");
+//	//::Sleep(150);
+//	return 0;
+//}
+//_____________________________________________________________________________
+//int SerialDev::ClearOverlapping (OVERLAPPED overlapped, UINT &command)
+//{
+//	ResetEvent (overlapped.hEvent);
+//	overlapped.InternalHigh = 0;
+//	overlapped.OffsetHigh = 0;
+//	overlapped.Offset = 0;
+//	overlapped.Internal = STATUS_PENDING;
+//	::SetLastError (ERROR_SUCCESS);
+//	COMSTAT comStat;
+//	DWORD   dwErrors;
+//	if (!ClearCommError (_hComm, &dwErrors, &comStat))
+//	{// Report error in ClearCommError. 
+//		LOGF (getName (), "ClearOverlapping err (%s)[%d]", _port, command);
+//		return 1;
+//	}
+//	return 0;
+//}

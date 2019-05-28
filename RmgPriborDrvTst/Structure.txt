@@ -1,0 +1,21 @@
+subscribeWrite    - SerialDev.cpp
+getNewArchiveData   - RmgStorage
+Цикл запросов - RmgPriborDrv.cpp 260
+
+SD_INIT - откр.порта
+SD_NEXT_REQUEST:
+Ищем текущую отправку - _activeTransactionIdx 
+
+
+isNeedContinuation() - RmgTransaction.cpp
+setWriteParameter() - RmgTransaction.cpp
+_rawBufferOut - буфер отправки команды
+
+_writeParam - буфер параметра записи
+
+SerialDev::sendTransaction ()
+
+
+RMGtransaction.cpp line 1733:в расчёте СRC убрать? +1
+
+

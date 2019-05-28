@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{bb0f2499-e961-4d86-8be4-22abda7b3032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\ComPort">
+      <UniqueIdentifier>{6ee785d2-c364-421d-8569-b398491377de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interface\TCP">
+      <UniqueIdentifier>{62bf77be-8c79-44a0-a439-7b08c8224c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Messages">
+      <UniqueIdentifier>{eb34a9e4-f8ca-4f32-9068-53382193d5d8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\gas\trunk\SCADA\gasscada\Drivers\RmgPriborDrv\VersionsRMG.txt" />
+    <Text Include="Structure.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RmgRawParam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RmgStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RmgTransaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialDev.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Transaction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RmgPriborDrv.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\Connect.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\ComPort\COMM.H">
+      <Filter>Interface\ComPort</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\ComPort\ComPort.h">
+      <Filter>Interface\ComPort</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\ComPort\Pcomm.h">
+      <Filter>Interface\ComPort</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface\TCP\TCP.h">
+      <Filter>Interface\TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\ErrSock.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages\Messages.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="TrunkBuf.h">
+      <Filter>Messages</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RmgPriborDrv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RmgRawParam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RmgStorage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RmgTransaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialDev.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Storage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transaction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface\Connect.cpp">
+      <Filter>Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface\ComPort\ComPort.cpp">
+      <Filter>Interface\ComPort</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface\TCP\TCP.cpp">
+      <Filter>Interface\TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\ErrSock.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Messages\Messages.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="TrunkBuf.cpp">
+      <Filter>Messages</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Interface\ComPort\PCOMM.LIB">
+      <Filter>Interface\ComPort</Filter>
+    </Library>
+  </ItemGroup>
+</Project>

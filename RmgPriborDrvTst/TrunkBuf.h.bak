@@ -1,0 +1,21 @@
+#pragma once
+
+// Обрезание длины выводимой команды 
+class CTrunkBuf
+{
+public:
+#ifdef _DEBUG
+	static const int SIZE_BUF = 512;
+#else
+	static const int SIZE_BUF = 72;
+#endif // _DEBUG
+	
+	CTrunkBuf (char *cpBufOut, int &iSize, int Radix);
+	~CTrunkBuf ();
+	void Init (char *cpBufOut, int &iSize, int Radix);
+
+private:
+	char* cpBufOut;
+	bool bSizeIsTrunk = false;
+};
+

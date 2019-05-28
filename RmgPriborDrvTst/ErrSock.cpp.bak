@@ -1,0 +1,11 @@
+#include "stdafx.h"
+#include "ErrSock.h"
+
+
+CErrSock::CErrSock (const char* cpMess) : std::exception(cpMess)
+{
+}
+
+
+CErrSock::~CErrSock ()
+{}
