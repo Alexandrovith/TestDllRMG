@@ -3,20 +3,21 @@
 #include <locale>
 #include <string>
 #include <functional>
-#include <msclr\auto_gcroot.h>
+//#include <msclr\auto_gcroot.h>
 
 #include "LoadDLL.h"
 
 #include "Init_Superflo.cpp"
 #include "Subscribe_Superflo.cpp"
-#include "ZipByCppLog.h"
+//#include "ZipByCppLog.h"
 
 using namespace std;
 //#using "ZipByCppLog.dll"; 
 
-#define RMG
-//#define LOAD_ZIP
-#define LOAD_DLL
+//#define RMG 1
+//#define LOAD_ZIP 1
+#define LOAD_SUPER 1
+#define LOAD_DLL 1
 
 LPCSTR cpDll =
 #ifdef RMG
@@ -25,32 +26,18 @@ LPCSTR cpDll =
 #include "RmgPriborDrv.h"
 
 #endif // !LOAD_DLL
-#elif LOAD_SUPER
+#else 
+#ifdef LOAD_SUPER 1
 //#include "UsefullF.h"
 "UsefullF.dll";
 #else
 "ZipByCppLog.dll";
 //using namespace System::Runtime::InteropServices; // Marshal
 #endif
+#endif
 
 #define COMM(sym1,sym2) ((sym1) + ((sym2) << 8))
 string CRCtoASCII (USHORT crc);
-
-//static char* Format (const char* fmt, ...)
-//{
-//	static const int SIZE = 6000;
-//	static char caRet[SIZE + 1];
-//
-//	va_list ap;
-//	va_start (ap, fmt);
-//	int n = vsnprintf_s ((char*)caRet, SIZE, _TRUNCATE, fmt, ap);
-//	va_end (ap);
-//	if (n > -1/* && n < SIZE*/)
-//	{
-//		return (char*)caRet;
-//	}
-//	return (char*)"";
-//}
 
 void TestTCP ();
 unsigned short CRC (const unsigned char* data, UINT length, USHORT poly, USHORT init = 0, bool isbinary = false);
@@ -96,7 +83,6 @@ int main ()
 		return 1;
 #endif
 #endif
-
 	//USHORT usComm = COMM ('W', '1');
 	//Command.usComm = usComm;
 	//int ival = 99;
@@ -141,6 +127,7 @@ int main ()
 			"{\"DeviceName\":\"ЕС605_Ясень\",\"RequestName\":\"R2\",\"ParamName\":\"Pvc\"}",
 			"{\"DeviceName\":\"ЕС605_Ясень\",\"RequestName\":\"R2\",\"ParamName\":\"Dsm\"}",
 			"{\"DeviceName\":\"ЕС605_Ясень\",\"RequestName\":\"R2\",\"ParamName\":\"Adr\"}" };
+
 #elif LOAD_SUPER
 	InitConfig (caInit ());
 	//InitConfig ("{\"Devices\":[{\"Name\":\"SF_Жорновка\",\"Type\":\"SF21RU5D\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM14\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"29102018\",\"TH\":\"26102018\",\"TI\":\"23102018\",\"TA\":\"06102018\",\"FlowCtrl\":0},{\"Name\":\"SF_Осиповичи\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM11\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"01012000\",\"TH\":\"26102018\",\"TI\":\"09122016\",\"TA\":\"13052018\",\"FlowCtrl\":0},{\"Name\":\"SF_Елизово\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM24\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"01012000\",\"TH\":\"26102018\",\"TI\":\"12122016\",\"TA\":\"01012000\",\"FlowCtrl\":0},{\"Name\":\"SF_Светлогорск\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM13\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"29102018\",\"TH\":\"26102018\",\"TI\":\"25102018\",\"TA\":\"24102018\",\"FlowCtrl\":0},{\"Name\":\"SF_МГорка\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM19\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"01012000\",\"TH\":\"26102018\",\"TI\":\"19042018\",\"TA\":\"15072018\",\"FlowCtrl\":0},{\"Name\":\"SF_Червень\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM21\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"23012001\",\"TH\":\"25102018\",\"TI\":\"01012000\",\"TA\":\"12102018\",\"FlowCtrl\":0},{\"Name\":\"SF_СтДороги\",\"Type\":\"SF21RU6D\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM16\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"29102018\",\"TH\":\"26102018\",\"TI\":\"24102018\",\"TA\":\"16102018\",\"FlowCtrl\":0},{\"Name\":\"SF_Глуск\",\"Type\":\"SF21RU6D\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM17\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"29102018\",\"TH\":\"26102018\",\"TI\":\"24102018\",\"TA\":\"16102018\",\"FlowCtrl\":0},{\"Name\":\"SF_НОстров\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM25\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"01012000\",\"TH\":\"26102018\",\"TI\":\"12062017\",\"TA\":\"14072018\",\"FlowCtrl\":0},{\"Name\":\"SF_Рассвет\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM18\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"24012001\",\"TH\":\"26102018\",\"TI\":\"01012000\",\"TA\":\"01012000\",\"FlowCtrl\":0},{\"Name\":\"SF_Октябрьский\",\"Type\":\"SF21RU6D\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM15\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"29102018\",\"TH\":\"26102018\",\"TI\":\"25102018\",\"TA\":\"17102018\",\"FlowCtrl\":0},{\"Name\":\"SF1_Бобруйск\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM30\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"15042004\",\"TH\":\"26102018\",\"TI\":\"20092017\",\"TA\":\"10102017\",\"FlowCtrl\":0},{\"Name\":\"SF2_Бобруйск\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":2,\"BaudRate\":1200,\"Port\":\"COM31\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"01012000\",\"TH\":\"26102018\",\"TI\":\"12122016\",\"TA\":\"10102017\",\"FlowCtrl\":0},{\"Name\":\"SF_Кличев\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM34\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"01012000\",\"TH\":\"26102018\",\"TI\":\"07072018\",\"TA\":\"01012000\",\"FlowCtrl\":0},{\"Name\":\"SF_Рогачев\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM26\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"01012000\",\"TH\":\"26102018\",\"TI\":\"13022018\",\"TA\":\"17072018\",\"FlowCtrl\":0},{\"Name\":\"SF_Жлобин\",\"Type\":\"SF21RU7C\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":1200,\"Port\":\"COM28\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"01012000\",\"TH\":\"26102018\",\"TI\":\"12122016\",\"TA\":\"19092018\",\"FlowCtrl\":0},{\"Name\":\"SF_ПХГ\",\"Type\":\"SF21RU6D\",\"Password\":\"123\",\"Address\":1,\"BaudRate\":9600,\"Port\":\"COM36\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"TD\":\"24102018\",\"TH\":\"26102018\",\"TI\":\"29102018\",\"TA\":\"29102018\",\"FlowCtrl\":0}]}");
@@ -304,3 +291,20 @@ unsigned short CRC (const unsigned char* data, UINT length, USHORT poly, USHORT 
 	}
 	return crc;
 }
+
+
+//static char* Format (const char* fmt, ...)
+//{
+//	static const int SIZE = 6000;
+//	static char caRet[SIZE + 1];
+//
+//	va_list ap;
+//	va_start (ap, fmt);
+//	int n = vsnprintf_s ((char*)caRet, SIZE, _TRUNCATE, fmt, ap);
+//	va_end (ap);
+//	if (n > -1/* && n < SIZE*/)
+//	{
+//		return (char*)caRet;
+//	}
+//	return (char*)"";
+//}
