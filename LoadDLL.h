@@ -1,3 +1,13 @@
+///@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+///~~~~~~~~~	Проект:			Тест драйверов на С++
+///~~~~~~~~~	Прибор:			Все приборы
+///~~~~~~~~~	Модуль:			Подключение dll
+///~~~~~~~~~	Разработка:	Демешкевич С.А.
+///~~~~~~~~~	Дата:				xx.xx.2019
+
+///@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 #pragma once
 #include <Windows.h>
 
@@ -12,6 +22,7 @@ public:
 	typedef void (CALLBACK* DClose)();
 	typedef void (CALLBACK* DStopStartDev)(char*, bool);
 	typedef void (CALLBACK* DZipByCppLog)();
+	typedef int (CALLBACK* DGetValue)(int tagId, UCHAR*);
 
 	CLoadDLL (LPCSTR lpLibFileName);
 	~CLoadDLL ();

@@ -5009,5 +5009,11 @@ char* caTags[]  {
 "{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R42\",\"ParamName\":\"Pressure_Transmitter_Type\",\"ParamsOutList\":[{\"Name\":\"RunNumber\",\"Value\":\"1\"}]}",
 "{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R42\",\"ParamName\":\"Pressure_Transmitter_Type\",\"ParamsOutList\":[{\"Name\":\"RunNumber\",\"Value\":\"2\"}]}",
 "{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R42\",\"ParamName\":\"Intercheck_Interval\",\"ParamsOutList\":[{\"Name\":\"RunNumber\",\"Value\":\"1\"}]}",
+"{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R47\",\"ParamName\":\"Differential_Pressure_value\",\"ParamsOutList\":[{\"Name\":\"SuperFlo_Write_Password\",\"Value\":\"%SuperFlo_Write_Password%\"},{\"Name\":\"RunNumber\",\"Value\":\"1\"}]}",
+"{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R47\",\"ParamName\":\"Static_Pressure_Value\",\"ParamsOutList\":[{\"Name\":\"SuperFlo_Write_Password\",\"Value\":\"%SuperFlo_Write_Password%\"},{\"Name\":\"RunNumber\",\"Value\":\"1\"}]}",
+"{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R47\",\"ParamName\":\"Temperature_Value\",\"ParamsOutList\":[{\"Name\":\"SuperFlo_Write_Password\",\"Value\":\"%SuperFlo_Write_Password%\"},{\"Name\":\"RunNumber\",\"Value\":\"1\"}]}",
+"{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R46\",\"ParamName\":\"Differential_Pressure_Flag\",\"ParamsOutList\":[{\"Name\":\"RunNumber\",\"Value\":\"1\"}]}",
+"{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R46\",\"ParamName\":\"Static_Pressure_Flag\",\"ParamsOutList\":[{\"Name\":\"RunNumber\",\"Value\":\"1\"}]}",
+"{\"DeviceName\":\"SF ГРС Добруш\",\"RequestName\":\"R46\",\"ParamName\":\"Temperature_Flag\",\"ParamsOutList\":[{\"Name\":\"RunNumber\",\"Value\":\"1\"}]}"
 };
 

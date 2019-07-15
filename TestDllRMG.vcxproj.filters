@@ -24,6 +24,12 @@
     <ClCompile Include="LoadDLL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FindPair.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WrConstParam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RmgPriborDrv.h">
@@ -35,12 +41,18 @@
     <ClInclude Include="LoadDLL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestRMG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FindPair.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WrConstParam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Init_Superflo.cpp">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="Subscribe_Superflo.cpp">
       <Filter>Source Files</Filter>
     </None>
     <None Include="cpp.hint" />

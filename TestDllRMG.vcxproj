@@ -19,17 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="WrConstParam.cpp" />
     <None Include="cpp.hint" />
     <None Include="Init_Superflo.cpp" />
+    <ClCompile Include="FindPair.cpp" />
     <ClCompile Include="LoadDLL.cpp" />
     <ClCompile Include="RmgPriborDrvTst\TrunkBuf.cpp" />
     <ClCompile Include="TestRMG.cpp" />
-    <None Include="Subscribe_Superflo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FindPair.h" />
     <ClInclude Include="LoadDLL.h" />
     <ClInclude Include="RmgPriborDrv.h" />
     <ClInclude Include="RmgPriborDrvTst\TrunkBuf.h" />
+    <ClInclude Include="TestRMG.h" />
+    <ClInclude Include="WrConstParam.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -118,7 +122,7 @@
       <AdditionalUsingDirectories>
       </AdditionalUsingDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS</PreprocessorDefinitions>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
