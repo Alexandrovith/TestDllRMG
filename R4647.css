@@ -1,0 +1,306 @@
+char* capTags[]{
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Добруш","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Рудня","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-2А","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Турск","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R47","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R47","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Мозырь","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-1А","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R47","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R47","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R47","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R47","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R47","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R47","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R47","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Брагин","RequestName":"R47","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"SuperFlo_Write_Password","Value":"%SuperFlo_Write_Password%"},{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Петриков","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Микашевичи","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ст.Село","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Корма","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Тереховка","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Чечерск","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Крупец","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Будище","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А Город","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Зябровка","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС-3А ТЭЦ","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Речица","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Житковичи","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Калинковичи","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Хойники","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Differential_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Differential_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Static_Pressure_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Static_Pressure_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Temperature_Flag","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"1"}]}
+{"DeviceName":"SF ГРС Ельск","RequestName":"R46","ParamName":"Temperature_Value","ParamsOutList":[{"Name":"RunNumber","Value":"2"}]}
+};

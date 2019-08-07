@@ -11,7 +11,7 @@ class CWrConstParam
 	class EParam 
 	{
 	public:
-		enum Epar { Static_Pressure_Value, Temperature_Value, Differential_Pressure_Value, Mole_Percent_CO2,  
+		enum Epar { Static_Pressure_Value, Temperature_Value, Differential_Pressure_Value, Tap_Location,  
 								Static_Pressure_Flag, Temperature_Flag,	Differential_Pressure_Flag,			
 					SIZE
 					} Val;
@@ -56,7 +56,7 @@ class CWrConstParam
 			case CWrConstParam::EParam::Differential_Pressure_Flag: return "Differential_Pressure_Flag";
 			case CWrConstParam::EParam::Static_Pressure_Flag: return "Static_Pressure_Flag";
 			case CWrConstParam::EParam::Temperature_Flag: return "Temperature_Flag";
-			case CWrConstParam::EParam::Mole_Percent_CO2: return "Mole_Percent_CO2";
+			case CWrConstParam::EParam::Tap_Location: return "Tap_Location";
 			case CWrConstParam::EParam::SIZE: return "SIZE";
 			default: return "";
 			}
@@ -74,7 +74,7 @@ public:
 	CWrConstParam (CLoadDLL::DWriteValue WriteValue, CLoadDLL::DGetValue GetValue, char** caTagWr);
 	~CWrConstParam ();
 	void GetIdOfConstParam (char* cpTag, int NumValByWr);
-	void WrValue (EParam ParName);
+	void WrValue (EParam ParName, int iSizeVal);
 
 	void OutBuf (char* caVal, int iSize);
 

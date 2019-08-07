@@ -12,10 +12,15 @@
 using namespace std;
 //#using "ZipByCppLog.dll"; 
 
-//#define RMG 1
+#define RMG 1
 //#define LOAD_ZIP 1
-#define LOAD_SUPER 1
+//#define LOAD_SUPER 1
 #define LOAD_DLL 1
+
+typedef void (CALLBACK* DInitDll)();
+DInitDll InitDll;
+typedef void (RunSubscribe) ();
+typedef void (RunInit) ();
 
 LPCSTR cpDll =
 #ifdef RMG
@@ -30,9 +35,9 @@ LPCSTR cpDll =
 #include "Init_Superflo.cpp"
 //#include "Subscribe_Superflo.cpp"
 #include "SubscribeSuperfloShort.cpp"
-
-typedef void (CALLBACK* DInitDll)();
-DInitDll InitDll;
+//
+//typedef void (CALLBACK* DInitDll)();
+//DInitDll InitDll;
 #else
 #include "ZipByCppLog.h"
 "ZipByCppLog.dll";
@@ -124,21 +129,21 @@ lbRestart:
 	char* cpInitDrv = "{\"Devices\":[{\"Name\":\"EC605_test\",\"Type\":\"\",\"Password\":\"22222\",\"WritePassword\":\"33333\",\"UserId\":\"01\",\"UrlSingleParam\":\"192.168.1.23\",\"Address\":1,\"BaudRate\":9600,\"Port\":\"520\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"FlowCtrl\":0,\"SetRTS\":0,\"TD\":\"23112017\",\"TH\":\"23112017\",\"TI\":\"01112017\",\"TA\":\"14042017\",\"Transport\":\"Ethernet\"}]}";
 
 	//192.168.127.254  192.168.1.123          FlexVisServer\bin
-	InitConfig (cpInitDrv);	//"{\"Devices\":[{\"Name\":\"≈—605_ясень\",\"Type\":\"\",\"Password\":\"22222\",\"WritePassword\":\"33333\",\"UserId\":\"00\",\"Address\":0,\"BaudRate\":9600,\"Port\":\"COM10\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"FlowCtrl\":0,\"SetRTS\":0,\"TD\":\"10052018\",\"TH\":\"10052018\",\"TI\":\"02042018\",\"TA\":\"11042018\",\"Transport\":\"\"}]}"
+	InitConfig (cpInitDrv);	//"{\"Devices\":[{\"Name\":\"EC605_test\",\"Type\":\"\",\"Password\":\"22222\",\"WritePassword\":\"33333\",\"UserId\":\"00\",\"Address\":0,\"BaudRate\":9600,\"Port\":\"COM10\",\"DataBits\":8,\"Parity\":0,\"StopBit\":1,\"FlowCtrl\":0,\"SetRTS\":0,\"TD\":\"10052018\",\"TH\":\"10052018\",\"TI\":\"02042018\",\"TA\":\"11042018\",\"Transport\":\"\"}]}"
 
 	for (;;)
 	{
 		std::cout << "Subscribe..." << std::endl;
 
-		char* caTags[] = {
-			"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"R2\",\"ParamName\":\"Tpr\"}",
-			"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"R6\",\"ArchiveName\":\"as\"}",
-			"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"H2\",\"ArchiveName\":\"H2\"}",
-			"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"R2\",\"ParamName\":\"verze\"}",
-			"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"R2\",\"ParamName\":\"CZ\"}",
-			"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"R2\",\"ParamName\":\"Pvc\"}",
-			"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"R2\",\"ParamName\":\"Dsm\"}",
-			"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"R2\",\"ParamName\":\"Adr\"}" };
+		char* capTags[] = {
+			"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"R2\",\"ParamName\":\"Tpr\"}",
+			"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"R6\",\"ArchiveName\":\"as\"}",
+			"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"H2\",\"ArchiveName\":\"H2\"}",
+			"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"R2\",\"ParamName\":\"verze\"}",
+			"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"R2\",\"ParamName\":\"CZ\"}",
+			"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"R2\",\"ParamName\":\"Pvc\"}",
+			"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"R2\",\"ParamName\":\"Dsm\"}",
+			"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"R2\",\"ParamName\":\"Adr\"}" };
 
 #elif LOAD_SUPER
 
@@ -156,6 +161,7 @@ lbRestart:
 #endif
 
 #ifndef LOAD_ZIP
+#ifdef LOAD_SUPER
 		WrConstParam = make_shared<CWrConstParam> (WriteValue, GetValue, capTags);
 
 		int TagId = 0;
@@ -167,16 +173,24 @@ lbRestart:
 			WrConstParam->GetIdOfConstParam (T, TagId);
 			TagId++;
 		}
+#else
+		int TagId = 0;
+		//unique_ptr<CFindPair> FindPair (new CFindPair ());
+		for (auto T : capTags)
+		{
+			Subscribe (TagId, T);			//Sleep (50);
+		}
+#endif
 
 		std::cout << "ѕроцесс ... (Enter - выход, пробел - новый цикл)" << WrConstParam->MessHelp () << endl;
-
+#ifdef LOAD_SUPER
 		if (WrConstParam->Process () == 0)
 		{
 			Close ();
 			return 0;
 		}
 		else goto lbRestart;
-
+#endif
 		int Key = getchar ();
 
 		switch (Key)
@@ -214,10 +228,10 @@ void WrVal (EModeWrite ModeWrite)
 }
 
 char* capTagWr[] = {
-	"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"W1\",\"ParamName\":\"kCO2\"}"
-	,"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"W1\",\"ParamName\":\"kN2\"}"
-	,"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"W1\",\"ParamName\":\"kd\"}"
-	,"{\"DeviceName\":\"≈—605_ясень\",\"RequestName\":\"W1\",\"ParamName\":\"Dat\"}"
+	"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"W1\",\"ParamName\":\"kCO2\"}"
+	,"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"W1\",\"ParamName\":\"kN2\"}"
+	,"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"W1\",\"ParamName\":\"kd\"}"
+	,"{\"DeviceName\":\"EC605_test\",\"RequestName\":\"W1\",\"ParamName\":\"Dat\"}"
 };
 //.............................................................................
 

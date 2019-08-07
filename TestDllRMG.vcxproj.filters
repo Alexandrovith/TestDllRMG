@@ -30,6 +30,9 @@
     <ClCompile Include="WrConstParam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WrRMG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RmgPriborDrv.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WrConstParam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WrRMG.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

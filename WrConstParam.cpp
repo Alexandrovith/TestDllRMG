@@ -71,26 +71,26 @@ void CWrConstParam::GetIdOfConstParam (char* cpTag, int NumValByWr)
 	}
 	else if (RequestName == "R43")
 	{
-		if (ParamName == "Mole_Percent_CO2")
-			iaTagsWrOfConstPar[(int)EParam::Mole_Percent_CO2] = NumValByWr;
+		if (ParamName == "Tap_Location")
+			iaTagsWrOfConstPar[(int)EParam::Tap_Location] = NumValByWr;
 	}
 	else if (RequestName == "R42")
 	{
-		if (ParamName == "Mole_Percent_CO2")
-			iaTagsRdOfConstPar[(int)EParam::Mole_Percent_CO2] = NumValByWr;
+		if (ParamName == "Tap_Location")
+			iaTagsRdOfConstPar[(int)EParam::Tap_Location] = NumValByWr;
 	}
 
 }
 //_____________________________________________________________________________
 
-float fValues[] = {  2.585, 27.0, 1.214, 0.047 };
-char cpFlag[] = { 2,3,4 };
+float fValues[] = {  4235.5, 27.0, 1.214, 0.048 };
+char cpFlag[] = { 1,1,1 };
 
-void CWrConstParam::WrValue (EParam ParName)
+void CWrConstParam::WrValue (EParam ParName, int iSizeVal)
 {
 	char caBuf[64];
 	std::cout << "Запись " << ParName.ToString ().c_str () << "[";
-	if (ParName.ToInt() < EParam::Static_Pressure_Flag)
+	if (iSizeVal == 4) //if (ParName.ToInt() < EParam::Static_Pressure_Flag)
 	{
 		char caVal[4];
 		*((float*)caVal) = fValues[ParName.ToInt ()];
@@ -169,13 +169,13 @@ int CWrConstParam::Process ()
 		case (char)EParam::Static_Pressure_Value + 0x30: ParName = EParam::Static_Pressure_Value;  break;
 		case (char)EParam::Temperature_Value + 0x30: ParName = EParam::Temperature_Value; break;
 		case (char)EParam::Differential_Pressure_Value + 0x30: ParName = EParam::Differential_Pressure_Value; break;
-		case (char)EParam::Mole_Percent_CO2 + 0x30: ParName = EParam::Mole_Percent_CO2; break;
+		case (char)EParam::Tap_Location + 0x30: ParName = EParam::Tap_Location; iSizeVal = 1; break;
 		case (char)EParam::Static_Pressure_Flag + 0x30: ParName = EParam::Static_Pressure_Flag; iSizeVal = 1; break;
 		case (char)EParam::Temperature_Flag + 0x30: ParName = EParam::Temperature_Flag; iSizeVal = 1; break;
 		case (char)EParam::Differential_Pressure_Flag + 0x30: ParName = EParam::Differential_Pressure_Flag; iSizeVal = 1; break;
 		default: std::cout << "неправильный это ввод." << std::endl; continue;
 		}
-		WrValue (ParName);
+		WrValue (ParName, iSizeVal);
 		DWORD iTime = 0;
 		DWORD ulStartTime = timeGetTime ();
 		std::unique_ptr<unsigned char[]> cpVal (new unsigned char[iSizeVal]);
